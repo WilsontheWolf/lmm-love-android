@@ -1,0 +1,5 @@
+create android/x86_64/libluajit.a
+addlib src/libluajit.a
+addlib src/liblovely.a
+save
+end

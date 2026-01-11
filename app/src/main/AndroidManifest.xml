@@ -43,5 +43,15 @@
         <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
       </intent-filter>
     </activity>
+    <provider
+        android:name="org.love2d.android.LoveDocumentsProvider"
+        android:authorities="${applicationId}.saves"
+        android:exported="true"
+        android:grantUriPermissions="true"
+        android:permission="android.permission.MANAGE_DOCUMENTS">
+      <intent-filter>
+        <action android:name="android.content.action.DOCUMENTS_PROVIDER" />
+      </intent-filter>
+    </provider>
   </application>
 </manifest>

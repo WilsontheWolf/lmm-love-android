@@ -17,4 +17,6 @@
 #}
 
 -keep class org.love2d.android.GameActivity { *; }
+-keep class org.love2d.android.LoveDocumentsProvider { *; }
+-keep class org.love2d.luahttps.LuaHTTPS { *; }
 -keep class org.libsdl.app.** { *; }

@@ -15,3 +15,5 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+-keep class org.love2d.android.* { *; }
+-keep class org.libsdl.app.** { *; }
