@@ -22,6 +22,7 @@
 #include "lj_trace.h"
 #include "lj_lib.h"
 #include "lj_vmevent.h"
+#include "lovely.h"
 
 #if LJ_TARGET_POSIX
 #include <sys/wait.h>
@@ -351,6 +352,8 @@ static void *mem_alloc(void *ud, void *ptr, size_t osize, size_t nsize)
 
 LUALIB_API lua_State *luaL_newstate(void)
 {
+  struct LuaLib lua = {lua_call, lua_pcall, lua_getfield, lua_setfield, lua_gettop, lua_settop, lua_pushvalue, lua_pushcclosure, lua_tolstring, lua_type, lua_pushstring, lua_pushnumber, lua_pushboolean, lua_settable, lua_createtable, lua_error, luaL_register, luaL_checklstring};
+  lovely_init(lovely_loadbufferx, lua);
   lua_State *L = lua_newstate(mem_alloc, NULL);
   if (L) {
     G(L)->panic = panic;
@@ -369,6 +372,8 @@ LUALIB_API lua_State *luaL_newstate(void)
 
 LUALIB_API lua_State *luaL_newstate(void)
 {
+  struct LuaLib lua = {lua_call, lua_pcall, lua_getfield, lua_setfield, lua_gettop, lua_settop, lua_pushvalue, lua_pushcclosure, lua_tolstring, lua_type, lua_pushstring, lua_pushnumber, lua_pushboolean, lua_settable, lua_createtable, lua_error, luaL_register, luaL_checklstring};
+  lovely_init(lovely_loadbufferx, lua);
   lua_State *L;
 #if LJ_64 && !LJ_GC64
   L = lj_state_newstate(LJ_ALLOCF_INTERNAL, NULL);

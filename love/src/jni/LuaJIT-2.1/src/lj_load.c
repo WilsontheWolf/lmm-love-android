@@ -22,6 +22,7 @@
 #include "lj_lex.h"
 #include "lj_bcdump.h"
 #include "lj_parse.h"
+#include "lovely.h"
 
 /* -- Load Lua source code and bytecode ----------------------------------- */
 
@@ -134,7 +135,7 @@ static const char *reader_string(lua_State *L, void *ud, size_t *size)
   return ctx->str;
 }
 
-LUALIB_API int luaL_loadbufferx(lua_State *L, const char *buf, size_t size,
+LUALIB_API int lovely_loadbufferx(lua_State *L, const char *buf, size_t size,
 				const char *name, const char *mode)
 {
   StringReaderCtx ctx;
@@ -143,6 +144,11 @@ LUALIB_API int luaL_loadbufferx(lua_State *L, const char *buf, size_t size,
   return lua_loadx(L, reader_string, &ctx, name, mode);
 }
 
+LUALIB_API int luaL_loadbufferx(lua_State *L, const char *buf, size_t size,
+				const char *name, const char *mode)
+{
+  return lovely_apply_patches(L, buf, size, name, mode);
+}
 LUALIB_API int luaL_loadbuffer(lua_State *L, const char *buf, size_t size,
 			       const char *name)
 {

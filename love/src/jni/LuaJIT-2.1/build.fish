@@ -1,8 +1,6 @@
 #!/bin/env fish
 # To build Lovely:
-# cargo build --package liblovely --target aarch64-linux-android --release && cargo build --package liblovely --target x86_64-linux-android --release
-# 
-# If you somehow get 32bit working cargo build --package liblovely --target armv7-linux-androideabi --release && cargo build --package liblovely --target i686-linux-android --release
+# cargo build --package liblovely --target aarch64-linux-android --release && cargo build --package liblovely --target x86_64-linux-android --release && cargo build --package liblovely --target armv7-linux-androideabi --release && cargo build --package liblovely --target i686-linux-android --release
 
 export android_sdk=$HOME/Android/Sdk
 export lovely=$HOME/projects/lovely-injector
@@ -46,11 +44,11 @@ git apply -v --directory=love/src/jni/LuaJIT-2.1 $lovely/crates/liblovely/luajit
 
 setupLovely x86_64-linux-android
 setupLovely aarch64-linux-android
-# setupLovely armv7a-linux-androideabi armv7-linux-androideabi
-# setupLovely i686-linux-android
+setupLovely armv7a-linux-androideabi armv7-linux-androideabi
+setupLovely i686-linux-android
 
 build x86_64 x86_64-linux-android 21
 build arm64-v8a aarch64-linux-android 21
-# build armeabi-v7a armv7a-linux-androideabi 21 -m32
-# build x86 i686-linux-android 16 -m32
+build armeabi-v7a armv7a-linux-androideabi 21 -m32
+build x86 i686-linux-android 21 -m32
 
